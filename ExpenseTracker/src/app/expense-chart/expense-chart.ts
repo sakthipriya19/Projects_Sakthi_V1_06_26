@@ -16,7 +16,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class ExpenseChart {
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: ['Food', 'Entertainment', 'HouseHold', 'Travel', 'Shopping', 'Child Care', 'Health'],
+    labels: ['Food', 'Entertainment', 'HouseHold', 'Travel', 'Shopping', 'ChildCare', 'Health'],
     datasets: [
       {
         data: [],

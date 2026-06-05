@@ -28,19 +28,20 @@ export class ExpenseSummary {
       }else{
         this.userData.push(newData);
       }
-      this.totalExpense = this.userData.reduce((sum, exp) => sum + exp.amount, 0);
+      this.totalExpense = this.userData.reduce((sum, exp) => sum + Number(exp.amount), 0);
+
     }
   }
   loadExpenses() {
     this.expenseList.getExpenseDeatils().subscribe((data: Expense[]) => {
       this.userData = data;
     });
-    this.totalExpense = this.userData.reduce((sum, exp) => sum + exp.amount, 0);
+    this.totalExpense = this.userData.reduce((sum, exp) => sum + Number(exp.amount), 0);
   }
   deleteItem(id: number) {
     this.expenseList.deleteExpenseDetails(id).subscribe(() => {
       this.userData = this.userData.filter((expense) => expense.id !== id);
-      this.totalExpense = this.userData.reduce((sum, exp) => sum + exp.amount, 0);
+       this.totalExpense = this.userData.reduce((sum, exp) => sum + Number(exp.amount), 0);
     });
   }
   onEdit(data: Expense) {

@@ -9,7 +9,7 @@ import { Expense } from '../interface/expense';
 export class ExpenseService {
   private editExpenseSource = new BehaviorSubject<Expense | null>(null);
   editExpense$ = this.editExpenseSource.asObservable();
-  url = 'http://localhost:3000/expense';
+  url = 'https://6a22a9875c610353286a23c3.mockapi.io/expense';
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class ExpenseService {
     return this.http.post<Expense[]>(this.url, data);
   }
   deleteExpenseDetails(id: number): Observable<void> {
-    const url = `http://localhost:3000/expense/${id}`;
+    const url = `https://6a22a9875c610353286a23c3.mockapi.io/expense/${id}`;
     return this.http.delete<void>(url);
   }
  editExpenseDetails(user: Expense): Observable<Expense> {
