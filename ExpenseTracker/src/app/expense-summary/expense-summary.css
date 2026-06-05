@@ -1,0 +1,19 @@
+table,
+th,
+td {
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: 10px;
+}
+th {
+  position: sticky;
+  top: 0;              /* stick to top */
+  background: #f9f9f9; /* background so text doesn’t overlap */
+  z-index: 2;          /* ensures header stays above rows */
+}
+
+.btnCls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
