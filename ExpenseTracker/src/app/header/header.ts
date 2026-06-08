@@ -22,7 +22,6 @@ export class Header {
     date: new Date(),
   };
   constructor(private expenseList: ExpenseService) {}
-  ngOnInint() {}
   ngAfterViewInit() {
     this.expenseList.editExpense$.subscribe((data: any) => {
       if (data) {
@@ -32,11 +31,6 @@ export class Header {
         this.newExpense = { id: 0, title: '', amount: 0, category: '', date: new Date() };
         this.btnNameChange = false;
       }
-    });
-  }
-  ngOnChange() {
-    this.expenseList.getExpenseDeatils().subscribe((data: Expense[]) => {
-      console.log('displayed');
     });
   }
   addExpense() {
@@ -58,9 +52,10 @@ export class Header {
       this.expenseList.editExpenseDetails(this.newExpense).subscribe((savedExpense: any) => {
         this.expenseAdded.emit(savedExpense);
         this.btnNameChange = false;
-        this.clear()
+        this.clear();
       });
     }
+    this.expenseList.expenses.set([this.newExpense])
   }
   clear() {
     this.newExpense = { id: 0, title: '', amount: 0, category: '', date: new Date() };

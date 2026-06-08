@@ -1,37 +1,53 @@
 <div class="expense-list">
-  <h2>Recent Transactions</h2>
-<div style="overflow-y: auto; max-height: 400px; display: block; white-space: nowrap;">
-<table style="min-height: 200px; margin-bottom: 20px;">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (user of userData; track user.id) {
-      <tr>
-        <td>{{ user.title }}</td>
-        <td>{{ user.category }}</td>
-        <td>{{ user.amount }}</td>
-        <td style="width: 100% !important;">{{ user.date }}</td>
-        <td>
-          <div class="btnCls">
-            <button (click) ="onEdit(user)">Edit</button>
-            <button (click)="deleteItem(user.id)">Delete</button>
-          </div>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
-</div>
-    
+  <h2>Transactions Details</h2>
+  <div style="display: flex; gap: 10px; padding: 10px;">
+    <div>
+      <label>
+        From:
+        <input type="date" [(ngModel)]="fromDate" name="fromDate" />
+      </label>
+      <label>
+        To:
+        <input type="date" [(ngModel)]="toDate" name="toDate" />
+      </label>
+    </div>
 
-  
+    <div>
+      <button (click)="applyDateFilter()" >Apply filter</button>
+      <button type="button" (click)="clearFilter()" style="margin-left: 5px;">Clear</button>
+    </div>
+  </div>
+  <button type="button" style="margin: 10px;" (click) ="addToCSV()"> Export To CSV </button>
+
+  <div style="overflow-y: auto; max-height: 400px; display: block; white-space: nowrap;">
+    <table style="min-height: 200px; margin-bottom: 20px;">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of userData; track user.id) {
+        <tr>
+          <td>{{ user.title }}</td>
+          <td>{{ user.category }}</td>
+          <td>{{ user.amount }}</td>
+          <td style="width: 100% !important;">{{ user.date }}</td>
+          <td>
+            <div class="btnCls">
+              <button (click)="onEdit(user)">Edit</button>
+              <button (click)="deleteItem(user.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
   <br />
   <hr />
   <div style="display: flex; gap: 10px; ">
