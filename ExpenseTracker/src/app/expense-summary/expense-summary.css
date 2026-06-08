@@ -17,3 +17,13 @@ th {
   gap: 10px;
   justify-content: center;
 }
+table-container {
+  height: 200px;          /* fixed height */
+  overflow-y: auto;       /* scroll if content exceeds height */
+  border: 1px solid #ccc; /* optional border */
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}

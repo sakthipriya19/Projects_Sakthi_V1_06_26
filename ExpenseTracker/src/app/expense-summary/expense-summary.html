@@ -1,6 +1,6 @@
 <div class="expense-list">
   <h2>Transactions Details</h2>
-  <div style="display: flex; gap: 10px; padding: 10px;">
+  <div style="display: flex; gap: 10px; padding: 10px; flex-wrap: wrap; align-items: center;">
     <div>
       <label>
         From:
@@ -11,16 +11,15 @@
         <input type="date" [(ngModel)]="toDate" name="toDate" />
       </label>
     </div>
-
     <div>
-      <button (click)="applyDateFilter()" >Apply filter</button>
+      <button (click)="applyDateFilter()">Apply filter</button>
       <button type="button" (click)="clearFilter()" style="margin-left: 5px;">Clear</button>
     </div>
   </div>
-  <button type="button" style="margin: 10px;" (click) ="addToCSV()"> Export To CSV </button>
+  <button type="button" style="margin: 10px;" (click)="addToCSV()"> Export To CSV </button>
 
-  <div style="overflow-y: auto; max-height: 400px; display: block; white-space: nowrap;">
-    <table style="min-height: 200px; margin-bottom: 20px;">
+  <div  class="table-container" >
+    <table style="margin-bottom: 20px;">
       <thead>
         <tr>
           <th>Description</th>
@@ -31,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (user of userData; track user.id) {
+        @for (user of displayedExpenses; track user.id) {
         <tr>
           <td>{{ user.title }}</td>
           <td>{{ user.category }}</td>
@@ -47,6 +46,19 @@
         }
       </tbody>
     </table>
+  </div>
+  <div class="paginator-controls" style="float: right;">
+    <button type="button" (click)="previousPage()" [disabled]="pageIndex === 0">Previous</button>
+    <span>Page {{ pageIndex + 1 }} of {{ totalPages }}</span>
+    <button type="button" (click)="nextPage()" [disabled]="pageIndex >= totalPages - 1">Next</button>
+    <label>
+      Items per page:
+      <select [(ngModel)]="pageSize" (ngModelChange)="setPageSize($event)">
+        @for (size of pageSizeOptions; track size) {
+        <option [value]="size">{{ size }}</option>
+        }
+      </select>
+    </label>
   </div>
   <br />
   <hr />

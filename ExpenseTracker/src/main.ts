@@ -15,7 +15,7 @@ ChartJS.register(
 bootstrapApplication(App, {
   ...appConfig,
   providers: [
-    provideCharts(),
+   provideCharts(),
     ...(appConfig.providers ?? [])
   ]
 }).catch((err) => console.error(err));
