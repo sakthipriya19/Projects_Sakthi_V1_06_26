@@ -16,10 +16,11 @@
       <button type="button" (click)="clearFilter()" style="margin-left: 5px;">Clear</button>
     </div>
   </div>
-  <button type="button" style="margin: 10px;" (click)="addToCSV()"> Export To CSV </button>
+  <button style="margin: 10px; width: fit-content" (click)="addToCSV()">Export To CSV</button>
 
-  <div  class="table-container" >
-    <table style="margin-bottom: 20px;">
+  <!-- Scrollable table container -->
+  <div class="table-container">
+    <table>
       <thead>
         <tr>
           <th>Description</th>
@@ -31,23 +32,25 @@
       </thead>
       <tbody>
         @for (user of displayedExpenses; track user.id) {
-        <tr>
-          <td>{{ user.title }}</td>
-          <td>{{ user.category }}</td>
-          <td>{{ user.amount }}</td>
-          <td style="width: 100% !important;">{{ user.date }}</td>
-          <td>
-            <div class="btnCls">
-              <button (click)="onEdit(user)">Edit</button>
-              <button (click)="deleteItem(user.id)">Delete</button>
-            </div>
-          </td>
-        </tr>
+          <tr>
+            <td>{{ user.title }}</td>
+            <td>{{ user.category }}</td>
+            <td>{{ user.amount }}</td>
+            <td>{{ user.date }}</td>
+            <td>
+              <div class="btnCls">
+                <button (click)="onEdit(user)">Edit</button>
+                <button (click)="deleteItem(user.id)">Delete</button>
+              </div>
+            </td>
+          </tr>
         }
       </tbody>
     </table>
   </div>
-  <div class="paginator-controls" style="float: right;">
+
+  <!-- Paginator -->
+  <div class="paginator-controls">
     <button type="button" (click)="previousPage()" [disabled]="pageIndex === 0">Previous</button>
     <span>Page {{ pageIndex + 1 }} of {{ totalPages }}</span>
     <button type="button" (click)="nextPage()" [disabled]="pageIndex >= totalPages - 1">Next</button>
@@ -55,22 +58,22 @@
       Items per page:
       <select [(ngModel)]="pageSize" (ngModelChange)="setPageSize($event)">
         @for (size of pageSizeOptions; track size) {
-        <option [value]="size">{{ size }}</option>
+          <option [value]="size">{{ size }}</option>
         }
       </select>
     </label>
   </div>
-  <br />
+
   <hr />
-  <div style="display: flex; gap: 10px; ">
-    <div style="display: block; background-color: green; padding: 10px; border-radius: 20px; width :100%">
+
+  <!-- Fixed totals section -->
+  <div class="totals-section">
+    <div class="total-card green">
       <h4>Total Expense</h4>
-      <br />
       <div>{{ totalExpense | currency: 'INR' }}</div>
     </div>
-    <div style="display: block; background-color: orange; padding: 10px; border-radius: 20px; width :100%">
+    <div class="total-card orange">
       <h4>Monthly Budget</h4>
-      <br />
       <div>{{ 60000 | currency: 'INR' }}</div>
     </div>
   </div>
