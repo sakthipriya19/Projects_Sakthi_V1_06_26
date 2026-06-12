@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (user of displayedExpenses; track user.id) {
+        @for (user of displayedExpenses; track user._id) {
           <tr>
             <td>{{ user.title }}</td>
             <td>{{ user.category }}</td>
@@ -40,7 +40,7 @@
             <td>
               <div class="btnCls">
                 <button (click)="onEdit(user)">Edit</button>
-                <button (click)="deleteItem(user.id)">Delete</button>
+                <button (click)="deleteItem(user._id)">Delete</button>
               </div>
             </td>
           </tr>

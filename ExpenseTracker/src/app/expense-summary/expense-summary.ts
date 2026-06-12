@@ -34,10 +34,10 @@ export class ExpenseSummary {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['getNewData'] && this.getNewData) {
       const newData = this.getNewData;
-      const index = this.userData.findIndex((exp) => exp.id === newData.id);
+      const index = this.userData.findIndex((exp) => exp._id === newData._id);
       if (index !== -1) {
         this.userData[index] = newData;
-        const originalIndex = this.originalData.findIndex((exp) => exp.id === newData.id);
+        const originalIndex = this.originalData.findIndex((exp) => exp._id === newData._id);
         if (originalIndex !== -1) {
           this.originalData[originalIndex] = newData;
         }
@@ -59,12 +59,12 @@ export class ExpenseSummary {
     });
   }
 
-  deleteItem(id: number) {
+  deleteItem(id: string) {
     if (id) {
       alert('The Expense Details will be deleted');
       this.expenseList.deleteExpenseDetails(id).subscribe(() => {
-        this.userData = this.userData.filter((expense) => expense.id !== id);
-        this.originalData = this.originalData.filter((expense) => expense.id !== id);
+        this.userData = this.userData.filter((expense) => expense._id !== id);
+        this.originalData = this.originalData.filter((expense) => expense._id !== id);
         this.resetPagination();
         this.totalChange();
       });

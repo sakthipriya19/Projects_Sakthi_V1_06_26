@@ -15,7 +15,7 @@ export class Header {
   today: string = new Date().toISOString().split('T')[0];
   btnNameChange: boolean = false;
   newExpense: Expense = {
-    id: 0,
+    _id: '',
     title: '',
     amount: 0,
     category: '',
@@ -28,7 +28,7 @@ export class Header {
         this.newExpense = { ...data };
         this.btnNameChange = true;
       } else {
-        this.newExpense = { id: 0, title: '', amount: 0, category: '', date: new Date() };
+        this.newExpense = { _id: '', title: '', amount: 0, category: '', date: new Date() };
         this.btnNameChange = false;
       }
     });
@@ -46,7 +46,7 @@ export class Header {
       }
       this.expenseList.postExpenseDetails(this.newExpense).subscribe((savedExpense: any) => {
         this.expenseAdded.emit(savedExpense);
-        this.newExpense = { id: 0, title: '', amount: 0, category: '', date: new Date() };
+        this.newExpense = { _id: '', title: '', amount: 0, category: '', date: new Date() };
       });
     } else {
       this.expenseList.editExpenseDetails(this.newExpense).subscribe((savedExpense: any) => {
@@ -58,6 +58,6 @@ export class Header {
     this.expenseList.expenses.set([this.newExpense])
   }
   clear() {
-    this.newExpense = { id: 0, title: '', amount: 0, category: '', date: new Date() };
+    this.newExpense = { _id: '', title: '', amount: 0, category: '', date: new Date() };
   }
 }

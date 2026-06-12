@@ -1,6 +1,6 @@
 // src/app/models/expense.model.ts
 export interface Expense {
-  id: number;
+  _id: string;
   title: string;
   amount: number;
   category: string;
