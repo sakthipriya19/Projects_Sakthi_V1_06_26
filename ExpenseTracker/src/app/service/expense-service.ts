@@ -25,12 +25,12 @@ export class ExpenseService {
   postExpenseDetails(data: any) {
     return this.http.post<Expense[]>(this.url, data);
   }
-  deleteExpenseDetails(id: number): Observable<void> {
+  deleteExpenseDetails(id: string): Observable<void> {
     const url = `https://6a22a9875c610353286a23c3.mockapi.io/expense/${id}`;
     return this.http.delete<void>(url);
   }
   editExpenseDetails(user: Expense): Observable<Expense> {
-    return this.http.put<Expense>(`${this.url}/${user.id}`, user);
+    return this.http.put<Expense>(`${this.url}/${user._id}`, user);
   }
   exportToCsv(expense: Expense[], filename: string = '') {
     const headers = ['Description', 'Category', 'Amount', 'Date'];
